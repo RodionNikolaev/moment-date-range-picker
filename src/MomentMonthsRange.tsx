@@ -3,7 +3,7 @@ import { Moment } from "moment";
 import Month from './MomentMonth';
 import { WeekDays, Range } from "./utils";
 
-interface IMonthsRangeProps {
+export interface IMonthsRangeProps {
     firstDisplayedMonth?: Moment;
     monthsCount?;
     weekStartDay?: WeekDays;
@@ -11,7 +11,7 @@ interface IMonthsRangeProps {
     onRangeChange?: (newDate: Moment) => void;
 }
 
-class MonthsRangeState extends Range {
+export class MonthsRangeState extends Range {
     currentStartMonth: Moment;
     currentDate?: Moment;
 }

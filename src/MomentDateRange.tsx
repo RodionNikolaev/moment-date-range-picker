@@ -6,7 +6,7 @@ import { Moment } from 'moment';
 import * as moment from "moment";
 import classnames from 'classnames';
 
-interface IDateRangeProps {
+export interface IDateRangeProps {
     formatString?: string;
     firstDisplayedMonth?: Moment;
     weekStartDay?: WeekDays;
@@ -16,7 +16,7 @@ interface IDateRangeProps {
     onRangeChange?: (from, to) => void;
 }
 
-class DateRangeState {
+export class DateRangeState {
     from?: Moment;
     to?: Moment;
     currentInput?: string;

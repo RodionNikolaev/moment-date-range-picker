@@ -1,13 +1,15 @@
 {
-  "name": "moment-date-range",
-  "version": "0.5.0",
+  "name": "moment-date-range-picker",
+  "version": "0.5.4",
   "description": "React date range selector component based on momentJS",
   "main": "dist/MomentDateRange.js",
-  "dependencies": {
+  "devDependencies": {
     "@types/react": "^16.4.6",
     "@types/react-dom": "^16.0.6",
-    "classnames": "^2.2.6",
-    "less": "^3.7.1",
+    "less": "^3.7.1"
+  },
+  "dependencies": {    
+    "classnames": "^2.2.6",   
     "moment": "^2.22.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",

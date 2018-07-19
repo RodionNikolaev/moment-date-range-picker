@@ -7,7 +7,7 @@ import { MonthHeader } from "./MomentMonthHeader";
 
 import classnames from 'classnames';
 
-interface MonthProps {
+export interface MonthProps {
     firstMonthDay: Moment;
     weekStartDay: WeekDays;
     currentDate: Moment;
@@ -18,7 +18,7 @@ interface MonthProps {
     onCurrentDateChange?: (currentDate: Moment) => void;
 }
 
-class MonthState {
+export class MonthState {
     weeks: any[];
 }
 

@@ -1,16 +1,16 @@
-# moment-date-range
+# moment-date-range-picker
 React date range selector component based on momentJS.
 
 ### Install
 ```
-npm install moment-date-range --save
+npm install moment-date-range-picker --save
 ```
 
 ### Usage
 ```js
-import MomentDateRange from "moment-date-range/dist/MomentDateRange";
-import { WeekDays } from "moment-date-range/dist/utils";
-require("moment-date-range/dist/MomentDateRange.css");
+import MomentDateRange from "moment-date-range-picker/dist/MomentDateRange";
+import { WeekDays } from "moment-date-range-picker/dist/utils";
+require("moment-date-range-picker/dist/MomentDateRange.css");
 
  <MomentDateRange
                 formatString="DD MMM YYYY"
