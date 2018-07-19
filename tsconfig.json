@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "./dist",
+    "strict": false,
+    "noImplicitAny": false,
+    "jsx": "react"
+  },
+  "include": [
+    "./src/**/*.tsx",
+    "./src/**/*.ts"
+  ],
+  "typeRoots": [
+    "./src"   
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

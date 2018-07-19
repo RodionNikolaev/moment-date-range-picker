@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "removeComments": true,
+        "target": "ES5",
+        "module": "commonjs",
+        "noEmitOnError": true,
+        "jsx": "react"
+    },
+
+    "exclude": [
+        "node_modules"
+    ]
+}
