@@ -1,9 +1,11 @@
 # moment-date-range
-React date range selector component based on momentJS.
+React date range selector component based on momentJS. 
+
+This is a test library. Not for production.
 
 ### Install
 ```
-npm install moment-date-range --save
+npm install moment-date-range-picker --save
 ```
 
 ### Usage
