@@ -3,6 +3,8 @@ React date range selector component based on momentJS.
 
 ![alt text](https://raw.githubusercontent.com/RodionNikolaev/moment-date-range-picker/master/docs/moment-date-range-picker.png)
 
+[Demo page](https://rodionnikolaev.github.io/moment-date-range-picker/)
+
 ### Install
 ```
 npm install moment-date-range-picker --save
