@@ -1,5 +1,5 @@
 # moment-date-range-picker
-React date range selector component based on momentJS. 
+Simple and lightweight React date range picker component based on moment.js. 
 
 ![alt text](https://raw.githubusercontent.com/RodionNikolaev/moment-date-range-picker/master/docs/moment-date-range-picker.png)
 
@@ -18,11 +18,27 @@ require("moment-date-range-picker/dist/MomentDateRange.css");
 
  <MomentDateRange
                 formatString="DD MMM YYYY"
-                monthsCount={1}
+                monthsCount={4}
                 weekStartDay={WeekDays.Friday}
+                from={moment().add(5, 'day')}
                 to={moment().add(1, 'month')}
-                firstDisplayedMonth={moment().add(1, 'month')}
-                onRangeChange={(from, to) => console.info(from != null ? from.format("MM/DD/YY") : null, to != null ?          
-                to.format("MM/DD/YY") : null)}
+                firstDisplayedMonth={moment().add(-1, 'month')}
+                onRangeChange={(from, to) => console.info(from, to)}
  />
+```
+
+### Component properties
+```js 
+export interface IDateRangeProps {
+    formatString?: string;
+    firstDisplayedMonth?: Moment;
+    weekStartDay?: WeekDays;
+    monthsCount?: number;
+    from?: Moment;
+    to?: Moment;
+    locale?: string;
+    fromText?: string;
+    toText?: string;
+    onRangeChange?: (from, to) => void;
+}
 ```
