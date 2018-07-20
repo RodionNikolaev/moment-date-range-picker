@@ -2,3 +2,4 @@ node_modules
 /example/app/package-lock.json
 /example/dist
 /dist
+/docs/dist

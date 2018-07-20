@@ -1,6 +1,6 @@
 {
   "name": "moment-date-range-picker",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "React date range selector component based on momentJS",
   "main": "dist/MomentDateRange.js",
   "devDependencies": {
@@ -20,10 +20,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/RodionNikolaev/moment-date-range.git"
+    "url": "git://github.com/RodionNikolaev/moment-date-range-picker.git"
   },
   "bugs": {
-    "url": "https://github.com/RodionNikolaev/moment-date-range/issues"
+    "url": "https://github.com/RodionNikolaev/moment-date-range-picker/issues"
   },
   "keywords": [
     "moment",
@@ -32,7 +32,7 @@
     "picker",
     "range"
   ],
-  "homepage": "https://github.com/RodionNikolaev/moment-date-range#readme",
+  "homepage": "https://github.com/RodionNikolaev/moment-date-range-picker#readme",
   "author": "RodionNikolaev",
   "license": "MIT"
 }
