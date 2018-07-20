@@ -1,5 +1,4 @@
 node_modules
-/example/app/package-lock.json
-/example/dist
+/docs/app/package-lock.json
 /dist
 /docs/dist

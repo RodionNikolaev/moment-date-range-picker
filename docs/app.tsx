@@ -25,7 +25,7 @@ export default class App extends React.Component<any, any> {
                 />
                 <br/>
 
-                <MomentDateRange
+                {/* <MomentDateRange
                     weekStartDay={WeekDays.Friday}
                     formatString="DD MMM YY"
                     locale={"ru"}
@@ -34,7 +34,7 @@ export default class App extends React.Component<any, any> {
                     from={moment().startOf('day')}
                     to={moment().startOf('day').add(14, 'day')}
                     onRangeChange={(from, to) => { }}
-                /> 
+                />  */}
             </div>
         );
     }
