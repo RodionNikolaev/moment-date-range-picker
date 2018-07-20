@@ -75,7 +75,7 @@ export default class Month extends React.Component<MonthProps, MonthState> {
 
             <tbody>
                 <tr className="item weekday">
-                    {sortbyIndex(moment.weekdaysMin(), this.props.weekStartDay).map(d => <td key={d}>{d}</td>)}
+                    {sortbyIndex(moment.localeData(this.props.firstMonthDay.locale()).weekdaysMin(), this.props.weekStartDay).map(d => <td key={d}>{d}</td>)}
                 </tr>
                 {this.state.weeks.map((week) => <tr key={week}>
                     {

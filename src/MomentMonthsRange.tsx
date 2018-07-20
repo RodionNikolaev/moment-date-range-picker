@@ -29,7 +29,7 @@ export default class MonthsRange extends React.Component<IMonthsRangeProps, Mont
         this.state = state;
     }
     componentWillReceiveProps(nextProps: IMonthsRangeProps) {
-        this.setState({ ...this.state, from: nextProps.range.from, to: nextProps.range.to, currentStartMonth: nextProps.firstDisplayedMonth });
+        this.setState({ ...this.state, from: nextProps.range.from, to: nextProps.range.to});       
     }
 
     onPrevMonth() {

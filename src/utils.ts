@@ -28,11 +28,12 @@ export function inRange(day: Moment, from: Moment, to: Moment, currenTemptDate: 
 }
 
 export function sortbyIndex(array: any[], startIndex: number) {
+    let copy = array.map(w => w);
     if (startIndex > 0) {
-        var deleted = array.splice(0, startIndex);
-        array = array.concat(deleted);
+        var deleted = copy.splice(0, startIndex);
+        copy = copy.concat(deleted);
     }
-    return array;
+    return copy;
 }
 
 export function isDescendant(parent, child) {

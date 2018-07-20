@@ -13,12 +13,16 @@ export interface IDateRangeProps {
     monthsCount?: number;
     from?: Moment;
     to?: Moment;
+    locale?: string;
+    fromText?: string;
+    toText?: string;
     onRangeChange?: (from, to) => void;
 }
 
 export class DateRangeState {
     from?: Moment;
     to?: Moment;
+    locale: string;
     currentInput?: string;
 }
 
@@ -28,9 +32,11 @@ export default class MomentDateRange extends React.Component<IDateRangeProps, Da
         this.state = {
             from: props.from != null ? props.from.startOf('day') : null,
             to: props.to != null ? props.to.startOf('day') : null,
+            locale: props.locale || moment.locale(),
             currentInput: ""
         };
 
+        moment.locale(props.locale);
         this.onGlobalClick = this.onGlobalClick.bind(this);
     }
 
@@ -45,7 +51,8 @@ export default class MomentDateRange extends React.Component<IDateRangeProps, Da
     componentWillReceiveProps(nextProps: IDateRangeProps) {
         this.setState({
             from: nextProps.from != null ? nextProps.from.startOf('day') : null,
-            to: nextProps.to != null ? nextProps.to.startOf('day') : null
+            to: nextProps.to != null ? nextProps.to.startOf('day') : null,
+            locale: nextProps.locale || this.state.locale
         });
     }
 
@@ -66,7 +73,6 @@ export default class MomentDateRange extends React.Component<IDateRangeProps, Da
             if (to != null && to.isBefore(clickedDate)) {
                 to = null;
             }
-
             from = clickedDate;
         }
         else {
@@ -105,25 +111,25 @@ export default class MomentDateRange extends React.Component<IDateRangeProps, Da
         return (
             <div className="moment-date-range">
                 <div className="inputs">
-                    <input type="text" placeholder="Start Date"
+                    <input type="text" placeholder={this.props.fromText || "Start Date"}
                         className={classnames("input-from", { focus: this.state.currentInput == "from" })}
                         onFocus={() => { this.setState({ ...this.state, currentInput: "from" }) }}
                         onChange={() => { }}
                         onKeyDown={(e) => this.onKeyDown(e, false)}
-                        value={from != null ? from.format(this.props.formatString) : ""} />
+                        value={from != null ? from.locale(this.state.locale).format(this.props.formatString || "L") : ""} />
 
                     &nbsp;&nbsp;►&nbsp;&nbsp;
 
-                        <input type="text" placeholder="End Date"
+                        <input type="text" placeholder={this.props.toText || "End Date"}
                         className={classnames("input-from", { focus: this.state.currentInput == "to" })}
                         onFocus={() => { this.setState({ ...this.state, currentInput: "to" }) }}
                         onChange={() => { }}
                         onKeyDown={(e) => this.onKeyDown(e, true)}
-                        value={to != null ? to.format(this.props.formatString) : ""} />
+                        value={to != null ? to.locale(this.state.locale).format(this.props.formatString || "L") : ""} />
                 </div>
 
                 {this.state.currentInput != "" ? <MonthsRange
-                    weekStartDay={this.props.weekStartDay || moment.localeData(moment.locale()).firstDayOfWeek()}
+                    weekStartDay={this.props.weekStartDay || moment.localeData(this.state.locale).firstDayOfWeek()}
                     monthsCount={this.props.monthsCount || 3}
                     range={{ from, to }}
                     firstDisplayedMonth={this.props.firstDisplayedMonth || moment().startOf('month')}
