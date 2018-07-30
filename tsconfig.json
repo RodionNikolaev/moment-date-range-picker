@@ -11,12 +11,12 @@
   "include": [
     "./src/**/*.tsx",
     "./src/**/*.ts"
-  ],
+  ],  
   "typeRoots": [
     "./src"
   ],
-  "exclude": [
+  "exclude": [    
     "node_modules",
-    "example"
+    "docs"
   ]
 }

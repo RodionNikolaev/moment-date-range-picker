@@ -34,11 +34,15 @@ export interface IDateRangeProps {
     firstDisplayedMonth?: Moment;
     weekStartDay?: WeekDays;
     monthsCount?: number;
+
     from?: Moment;
     to?: Moment;
+
     locale?: string;
     fromText?: string;
     toText?: string;
+    closeOnSelect?: boolean;
+    disabledDates?: Moment[];
     onRangeChange?: (from, to) => void;
 }
 ```
