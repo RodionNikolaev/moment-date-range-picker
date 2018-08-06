@@ -31,11 +31,12 @@ export default class App extends React.Component<any, any> {
                     toText="По"
                     from={moment().startOf('day')}
                     to={moment().startOf('day').add(14, 'day')}
-                    disabledDates={[moment().startOf('day').add(4, 'day'), moment().startOf('day').add(9, 'day')]}                    
+                    disabledDates={[moment().startOf('day').add(4, 'day'), moment().startOf('day').add(9, 'day')]}
                     weekStartDay={WeekDays.Friday}
                     formatString="DD MMM YY"
                     closeOnSelect={false}
                     onRangeChange={(from, to) => { }}
+                    onError={(error: Error) => console.error(error)}
                 />
             </div>
         );

@@ -6,6 +6,7 @@ import { Moment } from 'moment';
 import * as moment from "moment";
 import classnames from 'classnames';
 
+
 export interface IDateRangeProps {
     formatString?: string;
     firstDisplayedMonth?: Moment;
@@ -20,7 +21,9 @@ export interface IDateRangeProps {
     toText?: string;
     closeOnSelect?: boolean;
     disabledDates?: Moment[];
+
     onRangeChange?: (from, to) => void;
+    onError?: (error: Error) => void;
 }
 
 export class DateRangeState {
@@ -49,11 +52,19 @@ export default class MomentDateRange extends React.Component<IDateRangeProps, Da
     }
 
     public componentDidMount() {
-        document.addEventListener('click', this.onGlobalClick)
+        document.addEventListener('click', this.onGlobalClick);
+
+        if (this.props.onError
+            && this.props.from && this.props.to && this.props.disabledDates
+            && isAnyBetween(this.props.disabledDates, this.props.from, this.props.to) == true) {
+            let error = new RangeError();
+            error.name = "DISABLED_DATES_INTERSECTION";
+            this.props.onError(error);
+        }
     }
 
     public componentWillUnmount() {
-        document.removeEventListener('click', this.onGlobalClick)
+        document.removeEventListener('click', this.onGlobalClick);       
     }
 
     componentWillReceiveProps(nextProps: IDateRangeProps) {
