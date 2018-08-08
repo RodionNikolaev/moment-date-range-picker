@@ -68,6 +68,6 @@ export interface IDateRangeProps {
   
     disabledDates?: Moment[]; // Moment objects array. Default empty.
     
-    onRangeChange?: (from, to) => void;
+    onRangeChange?: (from, to) => void; // Callback function.
 }
 ```

@@ -19,7 +19,7 @@ export default class App extends React.Component<any, any> {
 
                 <MomentDateRange
                     firstDisplayedMonth={moment().startOf('month').add(-1, 'month')}
-                    from={moment().startOf('day')}
+                    from={moment().startOf('day')}                  
                     locale={moment.locale()}
                     monthsCount={2}
                     enableUserInput={true}
@@ -37,6 +37,7 @@ export default class App extends React.Component<any, any> {
                     weekStartDay={WeekDays.Friday}
                     formatString="DD-MM-YY"
                     closeOnSelect={false}
+                    enableUserInput={true}
                     onRangeChange={(from, to) => { }}
                 />
             </div>

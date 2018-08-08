@@ -50,22 +50,7 @@ export default class MomentDateRange extends React.Component<IDateRangeProps, Da
     constructor(props: IDateRangeProps) {
         super(props);
 
-        let longDateFormat = moment.localeData(props.locale || moment.locale()).longDateFormat("L");
-
-        this.state = {
-            from: props.from != null ? props.from.startOf('day') : null,
-            to: props.to != null ? props.to.startOf('day') : null,
-
-            fromText: props.from != null ? props.from.locale(props.locale).format(props.formatString || longDateFormat) : "",
-            toText: props.to != null ? props.to.locale(props.locale).format(props.formatString || longDateFormat) : "",
-
-            longDateFormat: longDateFormat,
-
-            locale: props.locale || moment.locale(),
-            currentInput: "",
-            selectedDates: []
-        };
-
+        this.state = this.getStateFromProps(props, props.locale || moment.locale(), "");
         this.onGlobalClick = this.onGlobalClick.bind(this);
     }
 
@@ -78,16 +63,27 @@ export default class MomentDateRange extends React.Component<IDateRangeProps, Da
     }
 
     public componentWillReceiveProps(nextProps: IDateRangeProps) {
+        this.setState(this.getStateFromProps(nextProps, this.state.locale, this.state.currentInput));
+    }
 
-        let longDateFormat = moment.localeData(nextProps.locale || this.state.locale).longDateFormat("L");
-        this.setState({
-            from: nextProps.from != null ? nextProps.from.startOf('day') : null,
-            to: nextProps.to != null ? nextProps.to.startOf('day') : null,
-            toText: nextProps.to != null ? nextProps.to.format(nextProps.formatString || longDateFormat) : "",
-            fromText: nextProps.from != null ? nextProps.from.format(nextProps.formatString || longDateFormat) : "",
-            locale: nextProps.locale || this.state.locale,
-            longDateFormat
-        });
+    private getStateFromProps(props: IDateRangeProps, locale: string, currentInput: string): DateRangeState {
+
+        let longDateFormat = props.formatString || moment.localeData(locale).longDateFormat("L");
+        let selectedDates = (props.from != null && props.to != null) ? getActualRange(false, props.from, props.to, props.disabledDates) : [];
+
+        console.info(longDateFormat);
+
+        return {
+            ...this.state,
+            from: props.from != null ? props.from.startOf('day') : null,
+            to: selectedDates.length > 0 ? selectedDates[selectedDates.length - 1] : null,
+            toText: props.to != null ? props.to.format(props.formatString || longDateFormat) : "",
+            fromText: props.from != null ? props.from.format(props.formatString || longDateFormat) : "",
+            locale: props.locale || locale,
+            longDateFormat,
+            selectedDates,
+            currentInput
+        }
     }
 
     private onGlobalClick(e) {
@@ -108,7 +104,7 @@ export default class MomentDateRange extends React.Component<IDateRangeProps, Da
         this.setState({ ...this.state, selectedDates: actualRange });
     }
 
-    private onRangeChanged(newCurrentDate: Moment, swithInput: boolean = true) {
+    private onRangeChanged(newCurrentDate: Moment, switchInput: boolean = true) {
 
         let { from, to, currentInput } = this.state;
 
@@ -132,7 +128,7 @@ export default class MomentDateRange extends React.Component<IDateRangeProps, Da
         if (isAnyBetween(this.props.disabledDates, from, to))
             return;
 
-        if (swithInput == true) {
+        if (switchInput == true) {
             if (currentInput == "from") {
                 currentInput = "to";
             }
@@ -141,7 +137,7 @@ export default class MomentDateRange extends React.Component<IDateRangeProps, Da
                     currentInput = "to";
                 }
                 else {
-                    if (this.props.closeOnSelect == true)
+                    if (this.props.closeOnSelect == null || this.props.closeOnSelect == true)
                         currentInput = "";
                     else
                         currentInput = "from";
@@ -162,8 +158,8 @@ export default class MomentDateRange extends React.Component<IDateRangeProps, Da
             to,
             currentInput,
             selectedDates,
-            toText: to != null ? to.format(this.state.longDateFormat) : "",
-            fromText: from != null ? from.format(this.state.longDateFormat) : ""
+            toText: to != null ? to.locale(this.state.locale).format(this.state.longDateFormat) : "",
+            fromText: from != null ? from.locale(this.state.locale).format(this.state.longDateFormat) : ""
         }, () => this.props.onRangeChange(from, to));
     }
 
@@ -212,7 +208,7 @@ export default class MomentDateRange extends React.Component<IDateRangeProps, Da
 
     public render() {
 
-        let { currentInput, from, to } = this.state;
+        let { currentInput, from, to, fromText, toText } = this.state;
 
         return (
             <div className="moment-date-range">
@@ -222,7 +218,7 @@ export default class MomentDateRange extends React.Component<IDateRangeProps, Da
                         onFocus={() => { this.setState({ ...this.state, currentInput: "from" }) }}
                         onChange={(e) => this.onInputChange(e.target.value)}
                         onKeyDown={(e) => this.onKeyDown(e, false)}
-                        value={this.state.fromText} />
+                        value={fromText} />
 
                     &nbsp;&nbsp;►&nbsp;&nbsp;
 
@@ -231,7 +227,7 @@ export default class MomentDateRange extends React.Component<IDateRangeProps, Da
                         onFocus={() => { this.setState({ ...this.state, currentInput: "to" }) }}
                         onChange={(e) => this.onInputChange(e.target.value)}
                         onKeyDown={(e) => this.onKeyDown(e, true)}
-                        value={this.state.toText} />
+                        value={toText} />
                 </div>
 
                 {this.state.currentInput != "" ? <MonthsRange
