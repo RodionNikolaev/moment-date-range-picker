@@ -8,7 +8,7 @@ import classnames from 'classnames';
 
 
 export interface IDateRangeProps {
-    
+
     formatString?: string;
     firstDisplayedMonth?: Moment;
     weekStartDay?: WeekDays;
@@ -23,11 +23,11 @@ export interface IDateRangeProps {
 
     fromInputText?: string;
     toInputText?: string;
-    
+
     closeOnSelect?: boolean;
     disabledDates?: Moment[];
 
-    onRangeChange?: (from, to) => void;    
+    onRangeChange?: (from, to) => void;
 }
 
 export class DateRangeState {
@@ -70,7 +70,7 @@ export default class MomentDateRange extends React.Component<IDateRangeProps, Da
     }
 
     public componentDidMount() {
-        document.addEventListener('click', this.onGlobalClick);      
+        document.addEventListener('click', this.onGlobalClick);
     }
 
     public componentWillUnmount() {
@@ -199,10 +199,10 @@ export default class MomentDateRange extends React.Component<IDateRangeProps, Da
 
         if (date.isValid() == false) {
             if (isFromDate == true) {
-                this.setState({ ...this.state, fromText: dateText });
+                this.setState({ ...this.state, fromText: dateText, from: null, selectedDates: [] });
             }
             else {
-                this.setState({ ...this.state, toText: dateText });
+                this.setState({ ...this.state, toText: dateText, to: null, selectedDates: [] });
             }
         }
         else {

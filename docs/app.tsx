@@ -27,7 +27,7 @@ export default class App extends React.Component<any, any> {
                     onRangeChange={(from, to) => { }}
                 />
                 <br />
-                <MomentDateRange
+                {/* <MomentDateRange
                     from={moment().startOf('day')}
                     to={moment().startOf('day').add(5, 'day')}
 
@@ -50,7 +50,7 @@ export default class App extends React.Component<any, any> {
 
                     onRangeChange={(from: Moment, to: Moment) => { console.info(from.format, to.format()) }}
                 />
-                <br />
+                <br /> */}
 
                 <MomentDateRange
                     locale={"ru"}
