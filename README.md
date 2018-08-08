@@ -13,9 +13,9 @@ npm install moment-date-range-picker --save
 
 ### Usage
 ```js
-import MomentDateRange from "moment-date-range-picker/dist/MomentDateRange";
+import MomentDateRange from "moment-date-range-picker/dist/DateRange";
 import { WeekDays } from "moment-date-range-picker/dist/utils";
-require("moment-date-range-picker/dist/MomentDateRange.css");
+require("moment-date-range-picker/dist/DateRange.css");
 
  <MomentDateRange
         from={moment().startOf('day')}
