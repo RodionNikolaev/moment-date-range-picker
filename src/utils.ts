@@ -3,7 +3,8 @@ import * as moment from "moment";
 
 export enum WeekDays {
     Sunday = 0,
-    Monday, Tuesday,
+    Monday, 
+    Tuesday,
     Wednesday,
     Thursday,
     Friday,
@@ -80,7 +81,7 @@ export function isAnyBetween(days: Moment[], from: Moment, to: Moment) {
 
     for (let index = 0; index < days.length; index++) {
         let day = days[index];
-        if (isBetween(day, from, to) == true || day.isSame(from) == true || day.isSame(to) == true) {
+        if (isInRange(day, from, to) == true) {
             return true;
         }
     }
