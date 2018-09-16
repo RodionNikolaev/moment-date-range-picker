@@ -19,11 +19,11 @@ export default class App extends React.Component<any, any> {
 
                 <MomentDateRange
                     firstDisplayedMonth={moment().startOf('month').add(-1, 'month')}
-                    from={moment().startOf('day')}                  
+                    from={moment().startOf('day')}
                     locale={moment.locale()}
                     monthsCount={2}
                     enableUserInput={true}
-                    onRangeChange={(from, to) => { }}
+                    onRangeChange={(from, to) => { console.info(from, to) }}
                 />
                 <br />
 
@@ -38,7 +38,7 @@ export default class App extends React.Component<any, any> {
                     formatString="DD-MM-YY"
                     closeOnSelect={false}
                     enableUserInput={true}
-                    onRangeChange={(from, to) => { }}
+                    onRangeChange={(from, to) => { console.info(from, to) }}
                 />
             </div>
         );

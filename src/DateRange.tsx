@@ -68,17 +68,15 @@ export default class MomentDateRange extends React.Component<IDateRangeProps, Da
 
     private getStateFromProps(props: IDateRangeProps, locale: string, currentInput: string): DateRangeState {
 
-        let longDateFormat = props.formatString || moment.localeData(locale).longDateFormat("L");
+        let longDateFormat = props.formatString || moment.localeData(props.locale || locale).longDateFormat("L");
         let selectedDates = (props.from != null && props.to != null) ? getActualRange(false, props.from, props.to, props.disabledDates) : [];
-
-        console.info(longDateFormat);
 
         return {
             ...this.state,
             from: props.from != null ? props.from.startOf('day') : null,
             to: selectedDates.length > 0 ? selectedDates[selectedDates.length - 1] : null,
-            toText: props.to != null ? props.to.format(props.formatString || longDateFormat) : "",
-            fromText: props.from != null ? props.from.format(props.formatString || longDateFormat) : "",
+            fromText: props.from != null ? props.from.locale(props.locale || locale).format(props.formatString || longDateFormat) : "",
+            toText: props.to != null ? props.to.locale(props.locale || locale).format(props.formatString || longDateFormat) : "",
             locale: props.locale || locale,
             longDateFormat,
             selectedDates,
@@ -164,7 +162,11 @@ export default class MomentDateRange extends React.Component<IDateRangeProps, Da
     }
 
     private onKeyDown(e, isToDate) {
-
+        if (e.keyCode == 9 && isToDate) {
+            this.setState({ ...this.state, currentInput: "" });
+            return;
+        }
+        
         if ((this.props.enableUserInput || false) == true)
             return;
 
@@ -192,8 +194,9 @@ export default class MomentDateRange extends React.Component<IDateRangeProps, Da
 
         let date = moment(dateText, this.props.formatString || this.state.longDateFormat, true);
         let isFromDate = this.state.currentInput == "from";
+        let isEmpty = dateText.length == 0;
 
-        if (date.isValid() == false) {
+        if (date.isValid() == false && !isEmpty) {
             if (isFromDate == true) {
                 this.setState({ ...this.state, fromText: dateText, from: null, selectedDates: [] });
             }
@@ -202,7 +205,7 @@ export default class MomentDateRange extends React.Component<IDateRangeProps, Da
             }
         }
         else {
-            this.onRangeChanged(date, false);
+            this.onRangeChanged(isEmpty ? null : date, false);
         }
     }
 
