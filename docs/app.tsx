@@ -1,15 +1,13 @@
+import * as moment from 'moment';
 import * as React from 'react';
 import * as ReactDOM from "react-dom";
-import * as moment from 'moment';
-
 import MomentDateRange from '../src/DateRange';
+import '../src/DateRange.less';
 import { WeekDays } from '../src/utils';
-require('../src/DateRange.less')
-require('./app.less');
+import './app.less';
 
 export default class App extends React.Component<any, any> {
     public render() {
-
         return (
             <div>
                 <select onChange={(e) => { moment.locale(e.target.value); this.forceUpdate(); }}>
